@@ -2,7 +2,10 @@ package com.workshopngine.platform.staffmanagement.staff.domain.model.entities;
 
 import com.workshopngine.platform.staffmanagement.shared.domain.model.entities.AuditableModel;
 import com.workshopngine.platform.staffmanagement.staff.domain.model.aggregates.Mechanic;
+import com.workshopngine.platform.staffmanagement.staff.domain.model.commands.CreateSkillAreaCommand;
+import com.workshopngine.platform.staffmanagement.staff.domain.model.commands.CreateSkillCertificationCommand;
 import com.workshopngine.platform.staffmanagement.staff.domain.model.valueobjects.ESkillLevel;
+import com.workshopngine.platform.staffmanagement.staff.domain.model.valueobjects.FileId;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -37,5 +40,18 @@ public class SkillArea extends AuditableModel {
     public SkillArea() {
         super();
         this.certifications = new ArrayList<>();
+    }
+
+    public SkillArea(Mechanic mechanic, CreateSkillAreaCommand command) {
+        this();
+        this.mechanic = mechanic;
+        this.area = command.area();
+        this.level = command.level();
+    }
+
+    public SkillCertification addSkillCertification(CreateSkillCertificationCommand command, FileId fileId) {
+        SkillCertification certification = new SkillCertification(this, command, fileId);
+        this.certifications.add(certification);
+        return certification;
     }
 }

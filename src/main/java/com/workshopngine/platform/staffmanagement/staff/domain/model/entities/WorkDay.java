@@ -2,6 +2,7 @@ package com.workshopngine.platform.staffmanagement.staff.domain.model.entities;
 
 import com.workshopngine.platform.staffmanagement.shared.domain.model.entities.AuditableModel;
 import com.workshopngine.platform.staffmanagement.staff.domain.model.aggregates.Mechanic;
+import com.workshopngine.platform.staffmanagement.staff.domain.model.commands.CreateWorkDayCommand;
 import com.workshopngine.platform.staffmanagement.staff.domain.model.valueobjects.EDay;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -34,5 +35,13 @@ public class WorkDay extends AuditableModel {
         super();
         this.startAt = null;
         this.endAt = null;
+    }
+
+    public WorkDay(Mechanic mechanic, CreateWorkDayCommand command) {
+        super();
+        this.mechanic = mechanic;
+        this.day = command.day();
+        this.startAt = command.startAt();
+        this.endAt = command.endAt();
     }
 }
