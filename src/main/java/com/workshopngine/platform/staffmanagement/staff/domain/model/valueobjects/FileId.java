@@ -3,10 +3,10 @@ package com.workshopngine.platform.staffmanagement.staff.domain.model.valueobjec
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public record FileId(Long fileId) {
+public record FileId(String fileId) {
     public FileId {
-        if (fileId == null || fileId <= 0) {
-            throw new IllegalArgumentException("FileId must be greater than 0");
+        if (fileId == null || fileId.isBlank()) {
+            throw new IllegalArgumentException("fileId cannot be null or blank");
         }
     }
 }
