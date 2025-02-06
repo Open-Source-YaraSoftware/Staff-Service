@@ -20,8 +20,8 @@ import java.util.Collection;
 @Entity
 public class SkillArea extends AuditableModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "mechanic_id", nullable = false)

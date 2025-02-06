@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 @Entity
 public class SkillCertification extends AuditableModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
 
     @ManyToOne
     @JoinColumn(name = "skill_area_id", nullable = false)

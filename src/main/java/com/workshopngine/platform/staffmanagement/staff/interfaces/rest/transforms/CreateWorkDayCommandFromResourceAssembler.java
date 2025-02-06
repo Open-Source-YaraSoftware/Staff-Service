@@ -5,7 +5,7 @@ import com.workshopngine.platform.staffmanagement.staff.domain.model.valueobject
 import com.workshopngine.platform.staffmanagement.staff.interfaces.rest.dto.CreateWorkDayResource;
 
 public class CreateWorkDayCommandFromResourceAssembler {
-    public static CreateWorkDayCommand toCommandFromResource(Long mechanicId, CreateWorkDayResource resource) {
+    public static CreateWorkDayCommand toCommandFromResource(String mechanicId, CreateWorkDayResource resource) {
         return new CreateWorkDayCommand(
             mechanicId,
             EDay.fromString(resource.day()),

@@ -51,4 +51,10 @@ public class MechanicQueryServiceImpl implements MechanicQueryService {
         var skillArea = mechanic.get().getSkillAreaById(query.skillAreaId());
         return skillArea.getCertifications();
     }
+
+    @Override
+    public Boolean handle(IsAvailableMechanicByIdAndRequestedTimeQuery query) {
+        var mechanic = mechanicRepository.findById(query.mechanicId());
+        return null;
+    }
 }

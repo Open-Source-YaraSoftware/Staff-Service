@@ -35,8 +35,8 @@ public class SkillCertificationController {
             @ApiResponse(responseCode = "404", description = "Skill certifications not found")
     })
     public ResponseEntity<SkillCertificationResource[]> getAllSkillCertificationsByMechanicIdAndSkillAreaId(
-            @PathVariable Long mechanicId,
-            @PathVariable Long skillAreaId
+            @PathVariable String mechanicId,
+            @PathVariable String skillAreaId
     ) {
         var query = new GetAllSkillCertificationsBySkillAreaIdAndMechanicIdQuery(mechanicId, skillAreaId);
         var skillCertifications = mechanicQueryService.handle(query);
@@ -54,8 +54,8 @@ public class SkillCertificationController {
             @ApiResponse(responseCode = "400", description = "Bad request")
     })
     public ResponseEntity<SkillCertificationResource> createSkillCertification(
-            @PathVariable Long mechanicId,
-            @PathVariable Long skillAreaId,
+            @PathVariable String mechanicId,
+            @PathVariable String skillAreaId,
             @RequestPart("resource") CreateSkillCertificationResource resource,
             @RequestPart("file") MultipartFile file
     ) {

@@ -5,7 +5,7 @@ import com.workshopngine.platform.staffmanagement.staff.interfaces.rest.dto.Crea
 import org.springframework.web.multipart.MultipartFile;
 
 public class CreateSkillCertificationCommandFromResourceAssembler {
-    public static CreateSkillCertificationCommand toCommandFromResource(Long mechanicId, Long skillAreaId, MultipartFile file, CreateSkillCertificationResource resource) {
+    public static CreateSkillCertificationCommand toCommandFromResource(String mechanicId, String skillAreaId, MultipartFile file, CreateSkillCertificationResource resource) {
         return new CreateSkillCertificationCommand(
             mechanicId,
             skillAreaId,

@@ -1,9 +1,9 @@
 package com.workshopngine.platform.staffmanagement.staff.domain.model.queries;
 
-public record GetMechanicByIdQuery(Long mechanicId) {
+public record GetMechanicByIdQuery(String mechanicId) {
     public GetMechanicByIdQuery {
-        if (mechanicId == null || mechanicId <= 0) {
-            throw new IllegalArgumentException("Invalid mechanic id");
+        if (mechanicId == null || mechanicId.isEmpty()) {
+            throw new IllegalArgumentException("Mechanic id is required");
         }
     }
 }

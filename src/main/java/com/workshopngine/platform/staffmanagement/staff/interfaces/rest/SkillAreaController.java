@@ -32,7 +32,7 @@ public class SkillAreaController {
             @ApiResponse(responseCode = "200", description = "Skill areas retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "Skill areas not found")
     })
-    public ResponseEntity<SkillAreaResource[]> getAllSkillAreasByMechanicId(@PathVariable Long mechanicId) {
+    public ResponseEntity<SkillAreaResource[]> getAllSkillAreasByMechanicId(@PathVariable String mechanicId) {
         var query = new GetAllSkillAreasByMechanicIdQuery(mechanicId);
         var skillAreas = mechanicQueryService.handle(query);
         var skillAreaResources = skillAreas
@@ -49,7 +49,7 @@ public class SkillAreaController {
             @ApiResponse(responseCode = "400", description = "Bad request")
     })
     public ResponseEntity<SkillAreaResource> createSkillArea(
-            @PathVariable Long mechanicId,
+            @PathVariable String mechanicId,
             @RequestBody CreateSkillAreaResource resource
     ) {
         var command = CreateSkillAreaCommandFromResourceAssembler.toCommandFromResource(mechanicId, resource);

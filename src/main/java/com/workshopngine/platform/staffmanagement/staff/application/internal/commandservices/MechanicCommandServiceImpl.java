@@ -24,7 +24,7 @@ public class MechanicCommandServiceImpl implements MechanicCommandService {
     private final FileManagementContextFacade fileManagementContextFacade;
 
     @Override
-    public Long handle(CreateMechanicCommand command) {
+    public String handle(CreateMechanicCommand command) {
         var mechanic = new Mechanic(command);
         try {
             mechanicRepository.save(mechanic);

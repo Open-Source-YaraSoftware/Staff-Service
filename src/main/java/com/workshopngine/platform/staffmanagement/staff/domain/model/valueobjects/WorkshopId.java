@@ -3,10 +3,10 @@ package com.workshopngine.platform.staffmanagement.staff.domain.model.valueobjec
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public record WorkshopId(Long workshopId) {
+public record WorkshopId(String workshopId) {
     public WorkshopId {
-        if (workshopId == null || workshopId <= 0) {
-            throw new IllegalArgumentException("WorkshopId must be a positive number");
+        if (workshopId == null || workshopId.isBlank()) {
+            throw new IllegalArgumentException("WorkshopId cannot be null or empty");
         }
     }
 }

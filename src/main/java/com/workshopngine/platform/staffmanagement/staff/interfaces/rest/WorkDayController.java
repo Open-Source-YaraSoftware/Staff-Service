@@ -32,7 +32,7 @@ public class WorkDayController {
             @ApiResponse(responseCode = "200", description = "Work days retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "Work days not found")
     })
-    public ResponseEntity<WorkDayResource[]> getAllWorkDaysByMechanicId(@PathVariable Long mechanicId) {
+    public ResponseEntity<WorkDayResource[]> getAllWorkDaysByMechanicId(@PathVariable String mechanicId) {
         var query = new GetAllWorkDaysByMechanicIdQuery(mechanicId);
         var workDays = mechanicQueryService.handle(query);
         var workDayResources = workDays
@@ -49,7 +49,7 @@ public class WorkDayController {
             @ApiResponse(responseCode = "400", description = "Bad request")
     })
     public ResponseEntity<WorkDayResource> createWorkDay(
-            @PathVariable Long mechanicId,
+            @PathVariable String mechanicId,
             @RequestBody CreateWorkDayResource resource
     ) {
         var command = CreateWorkDayCommandFromResourceAssembler.toCommandFromResource(mechanicId, resource);

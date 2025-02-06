@@ -15,4 +15,5 @@ public interface MechanicQueryService {
     Collection<WorkDay> handle(GetAllWorkDaysByMechanicIdQuery query);
     Collection<SkillArea> handle(GetAllSkillAreasByMechanicIdQuery query);
     Collection<SkillCertification> handle(GetAllSkillCertificationsBySkillAreaIdAndMechanicIdQuery query);
+    Boolean handle(IsAvailableMechanicByIdAndRequestedTimeQuery query);
 }

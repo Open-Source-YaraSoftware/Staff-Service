@@ -55,7 +55,7 @@ public class Mechanic extends AuditableAbstractAggregateRoot<Mechanic> {
         return skillArea;
     }
 
-    public SkillArea getSkillArea(Long skillAreaId) {
+    public SkillArea getSkillArea(String skillAreaId) {
         return skillAreas.stream()
                 .filter(skillArea -> skillArea.getId().equals(skillAreaId))
                 .findFirst()
@@ -67,7 +67,7 @@ public class Mechanic extends AuditableAbstractAggregateRoot<Mechanic> {
         return skillArea.addSkillCertification(command, fileId);
     }
 
-    public SkillArea getSkillAreaById(Long skillAreaId) {
+    public SkillArea getSkillAreaById(String skillAreaId) {
         return skillAreas.stream()
                 .filter(skillArea -> skillArea.getId().equals(skillAreaId))
                 .findFirst()

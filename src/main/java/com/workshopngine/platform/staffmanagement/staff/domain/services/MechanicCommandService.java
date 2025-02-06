@@ -11,7 +11,7 @@ import com.workshopngine.platform.staffmanagement.staff.domain.model.entities.Wo
 import java.util.Optional;
 
 public interface MechanicCommandService {
-    Long handle(CreateMechanicCommand command);
+    String handle(CreateMechanicCommand command);
     Optional<WorkDay> handle(CreateWorkDayCommand command);
     Optional<SkillArea> handle(CreateSkillAreaCommand command);
     Optional<SkillCertification> handle(CreateSkillCertificationCommand command);

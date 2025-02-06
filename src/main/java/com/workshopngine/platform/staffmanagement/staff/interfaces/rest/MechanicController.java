@@ -33,7 +33,7 @@ public class MechanicController {
             @ApiResponse(responseCode = "200", description = "Mechanics retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "Mechanics not found")
     })
-    public ResponseEntity<MechanicResource[]> getAllMechanicsByWorkshopId(@RequestParam(required = true) Long workshopId) {
+    public ResponseEntity<MechanicResource[]> getAllMechanicsByWorkshopId(@RequestParam String workshopId) {
         var query = new GetAllMechanicsByWorkshopIdQuery(workshopId);
         var mechanics = mechanicQueryService.handle(query);
         var mechanicResources = mechanics.stream()
@@ -48,7 +48,7 @@ public class MechanicController {
             @ApiResponse(responseCode = "200", description = "Mechanic found"),
             @ApiResponse(responseCode = "404", description = "Mechanic not found")
     })
-    public ResponseEntity<MechanicResource> getMechanicById(@PathVariable Long mechanicId) {
+    public ResponseEntity<MechanicResource> getMechanicById(@PathVariable String mechanicId) {
         var query = new GetMechanicByIdQuery(mechanicId);
         var mechanic = mechanicQueryService.handle(query);
         if (mechanic.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -65,7 +65,7 @@ public class MechanicController {
     public ResponseEntity<MechanicResource> createMechanic(@RequestBody CreateMechanicResource resource) {
         var command = CreateMechanicCommandFromResourceAssembler.toCommandFromResource(resource);
         var mechanicId = mechanicCommandService.handle(command);
-        if (mechanicId == 0L) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (mechanicId.isBlank()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(getMechanicById(mechanicId).getBody(), HttpStatus.CREATED);
     }
 }

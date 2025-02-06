@@ -5,7 +5,7 @@ import com.workshopngine.platform.staffmanagement.staff.domain.model.valueobject
 import java.time.LocalTime;
 
 public record CreateWorkDayCommand(
-        Long mechanicId,
+        String mechanicId,
         EDay day,
         LocalTime startAt,
         LocalTime endAt

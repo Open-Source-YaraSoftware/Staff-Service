@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 
 @Repository
-public interface MechanicRepository extends JpaRepository<Mechanic, Long> {
+public interface MechanicRepository extends JpaRepository<Mechanic, String> {
     Collection<Mechanic> findAllByWorkshopId(WorkshopId workshopId);
 }

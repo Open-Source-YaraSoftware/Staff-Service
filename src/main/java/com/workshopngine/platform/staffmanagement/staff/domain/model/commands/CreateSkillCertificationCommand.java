@@ -5,8 +5,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 
 public record CreateSkillCertificationCommand(
-        Long mechanicId,
-        Long skillAreaId,
+        String mechanicId,
+        String skillAreaId,
         String certificationName,
         String issuer,
         LocalDateTime issueDate,
