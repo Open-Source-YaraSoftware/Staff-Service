@@ -12,6 +12,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -72,5 +73,9 @@ public class Mechanic extends AuditableAbstractAggregateRoot<Mechanic> {
                 .filter(skillArea -> skillArea.getId().equals(skillAreaId))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Skill area with ID %s not found".formatted(skillAreaId)));
+    }
+
+    public Boolean isAvailable(LocalDateTime requestedTime) {
+        return this.workSchedule.isAvailableAtRequestedTime(requestedTime);
     }
 }
