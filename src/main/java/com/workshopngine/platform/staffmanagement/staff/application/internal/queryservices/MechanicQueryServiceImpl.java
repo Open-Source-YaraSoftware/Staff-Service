@@ -55,6 +55,7 @@ public class MechanicQueryServiceImpl implements MechanicQueryService {
     @Override
     public Boolean handle(IsAvailableMechanicByIdAndRequestedTimeQuery query) {
         var mechanic = mechanicRepository.findById(query.mechanicId());
-        return null;
+        if (mechanic.isEmpty()) return false;
+        return mechanic.get().isAvailable(query.requestedTime());
     }
 }
