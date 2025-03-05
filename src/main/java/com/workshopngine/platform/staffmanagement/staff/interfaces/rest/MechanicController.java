@@ -2,11 +2,14 @@ package com.workshopngine.platform.staffmanagement.staff.interfaces.rest;
 
 import com.workshopngine.platform.staffmanagement.staff.domain.model.queries.GetAllMechanicsByWorkshopIdQuery;
 import com.workshopngine.platform.staffmanagement.staff.domain.model.queries.GetMechanicByIdQuery;
+import com.workshopngine.platform.staffmanagement.staff.domain.model.queries.IsAvailableMechanicByIdAndRequestedTimeQuery;
 import com.workshopngine.platform.staffmanagement.staff.domain.services.MechanicCommandService;
 import com.workshopngine.platform.staffmanagement.staff.domain.services.MechanicQueryService;
 import com.workshopngine.platform.staffmanagement.staff.interfaces.rest.dto.CreateMechanicResource;
+import com.workshopngine.platform.staffmanagement.staff.interfaces.rest.dto.MechanicAvailabilityResource;
 import com.workshopngine.platform.staffmanagement.staff.interfaces.rest.dto.MechanicResource;
 import com.workshopngine.platform.staffmanagement.staff.interfaces.rest.transforms.CreateMechanicCommandFromResourceAssembler;
+import com.workshopngine.platform.staffmanagement.staff.interfaces.rest.transforms.MechanicAvailabilityResourceFromEntityAssembler;
 import com.workshopngine.platform.staffmanagement.staff.interfaces.rest.transforms.MechanicResourceFromEntityAssembler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,6 +19,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -67,5 +72,18 @@ public class MechanicController {
         var mechanicId = mechanicCommandService.handle(command);
         if (mechanicId.isBlank()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         return new ResponseEntity<>(getMechanicById(mechanicId).getBody(), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{mechanicId}/availability")
+    @Operation(summary = "Get mechanic availability", description = "Get mechanic availability by ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Mechanic availability retrieved successfully"),
+            @ApiResponse(responseCode = "404", description = "Mechanic availability not found")
+    })
+    public ResponseEntity<MechanicAvailabilityResource> getMechanicAvailability(@PathVariable String mechanicId, @RequestParam LocalDateTime requestedTime) {
+        var query = new IsAvailableMechanicByIdAndRequestedTimeQuery(mechanicId, requestedTime);
+        var isAvailable = mechanicQueryService.handle(query);
+        var mechanicAvailabilityResource = MechanicAvailabilityResourceFromEntityAssembler.toResourceFromEntity(mechanicId, isAvailable);
+        return new ResponseEntity<>(mechanicAvailabilityResource, HttpStatus.OK);
     }
 }
