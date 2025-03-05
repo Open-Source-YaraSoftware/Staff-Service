@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.workshop-n-gine.platform</groupId>
 	<artifactId>staff-management</artifactId>
-	<version>0.0.1</version>
+	<version>1.1.0</version>
 	<name>staff-management</name>
 	<description>staff-management</description>
 	<url/>
